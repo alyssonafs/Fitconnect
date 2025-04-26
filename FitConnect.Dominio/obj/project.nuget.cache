@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "pPYj7mSSwDs=",
+  "success": true,
+  "projectFilePath": "C:\\Alunos\\alyssonsilva\\Projeto Final\\Fitconnect\\FitConnect.Dominio\\FitConnect.Dominio.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\alyss\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.36\\microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\alyss\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.36\\microsoft.windowsdesktop.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\alyss\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.36\\microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512"
+  ],
+  "logs": []
+}
