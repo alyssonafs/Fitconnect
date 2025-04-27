@@ -6,7 +6,15 @@ namespace FitConnect.Repositorio.Contexto
 {
     public class FitConnectContexto : DbContext
     {
-        private readonly DbContextOptions _options;
+        public FitConnectContexto(DbContextOptions<FitConnectContexto> options) : base(options)
+        {
+            
+        }
+
+        public FitConnectContexto()
+        {
+
+        }
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Treino> Treinos { get; set; }
@@ -14,21 +22,15 @@ namespace FitConnect.Repositorio.Contexto
         public DbSet<TreinoCompartilhado> TreinosCompartilhados { get; set;}
         public DbSet<ExercicioTreino> ExerciciosTreinos { get; set; }
 
-        public FitConnectContexto()
-        {
+        
 
-        }
-
-        public FitConnectContexto(DbContextOptions options) : base(options)
-        {
-            _options = options;
-        }
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (_options == null)
+            if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlite(@"Filename=./fitconnect.sqlite");
+                var connectionString = "Server=NOTE-AFS\\SQLEXPRESS;Database=Fitconnect;TrustServerCertificate=True;Trusted_Connection=True;";
+                optionsBuilder.UseSqlServer(connectionString);
             }
         }
 
