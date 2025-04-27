@@ -6,12 +6,10 @@ namespace FitConnect.Dominio.Entidades
 
         public string Nome { get; set; }
 
-        public string Serie { get; set; }
+        public string GrupoMuscular { get; set; }
 
         public string Descricao { get; set; }
 
         public string VideoURL { get; set; }
-
-        public int TreinoId { get; set; }
     }
 }
