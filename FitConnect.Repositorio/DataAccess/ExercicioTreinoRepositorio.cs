@@ -1,6 +1,7 @@
 using FitConnect.Dominio.Entidades;
 using FitConnect.Repositorio.Contexto;
 using FitConnect.Repositorio.DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitConnect.Repositorio.DataAccess
 {
@@ -10,24 +11,36 @@ namespace FitConnect.Repositorio.DataAccess
         {
             
         }
-        public Task AtualizarAsync(ExercicioTreino exercicioTreino)
+        public async Task AtualizarAsync(ExercicioTreino exercicioTreino)
         {
-            throw new NotImplementedException();
+            _contexto.ExerciciosTreinos.Update(exercicioTreino);
+            await _contexto.SaveChangesAsync();
         }
 
-        public Task<IAsyncEnumerable<ExercicioTreino>> ListarAsync()
+        public async Task DeletarAsync(ExercicioTreino exercicioTreino)
         {
-            throw new NotImplementedException();
+            _contexto.ExerciciosTreinos.Remove(exercicioTreino);
+            await _contexto.SaveChangesAsync();
         }
 
-        public Task<ExercicioTreino> ObterPorId(int exercicioTreinoId)
+        public async Task<IEnumerable<ExercicioTreino>> ListarAsync()
         {
-            throw new NotImplementedException();
+            return await _contexto.ExerciciosTreinos.ToListAsync();
         }
 
-        public Task<int> SalvarAsync(ExercicioTreino exercicioTreino)
+        public async Task<ExercicioTreino> ObterPorId(int exercicioTreinoId)
         {
-            throw new NotImplementedException();
+            return await _contexto.ExerciciosTreinos
+                            .Where(et => et.Id == exercicioTreinoId)
+                            .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> SalvarAsync(ExercicioTreino exercicioTreino)
+        {
+            await _contexto.ExerciciosTreinos.AddAsync(exercicioTreino);
+            await _contexto.SaveChangesAsync();
+
+            return exercicioTreino.Id;
         }
     }
 }

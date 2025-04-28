@@ -10,7 +10,9 @@ namespace FitConnect.Repositorio.DataAccess.Interfaces
 
         Task<Exercicio> ObterPorId(int exercicioId);
 
-        Task<IAsyncEnumerable<Exercicio>> ListarAsync();
+        Task<IEnumerable<Exercicio>> ListarAsync();
+
+        Task DeletarAsync(Exercicio exercicio);
 
     }
 }

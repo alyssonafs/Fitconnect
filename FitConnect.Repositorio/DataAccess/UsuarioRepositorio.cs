@@ -1,6 +1,7 @@
 using FitConnect.Dominio.Entidades;
 using FitConnect.Repositorio.Contexto;
 using FitConnect.Repositorio.DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitConnect.Repositorio.DataAccess
 {
@@ -10,29 +11,59 @@ namespace FitConnect.Repositorio.DataAccess
         {
             
         }
-        public Task AtualizarAsync(Usuario usuario)
+        public async Task AtualizarAsync(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _contexto.Usuarios.Update(usuario);
+            await _contexto.SaveChangesAsync();
         }
 
-        public Task<IAsyncEnumerable<Usuario>> ListarAsync(bool ativo)
+        public async Task DeletarAsync(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _contexto.Usuarios.Remove(usuario);
+            await _contexto.SaveChangesAsync();
         }
 
-        public Task<Usuario> ObterPorEmailAsync(string email)
+        public async Task DeleteLogicoAsync(Usuario usuario)
         {
-            throw new NotImplementedException();
+            usuario.Ativo = false;
+            _contexto.Usuarios.Update(usuario);
+            await _contexto.SaveChangesAsync();
         }
 
-        public Task<Usuario> ObterPorId(int usuarioId)
+        public async Task<IEnumerable<Usuario>> ListarAsync(bool ativo)
         {
-            throw new NotImplementedException();
+            return await _contexto.Usuarios.Where(u => u.Ativo == ativo).ToListAsync();
         }
 
-        public Task<int> SalvarAsync(Usuario usuario)
+        public async Task<Usuario> ObterPorEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            return await _contexto.Usuarios
+                        .Where(u => u.Email == email)
+                        .Where(u => u.Ativo)
+                        .FirstOrDefaultAsync();
+        }
+
+        public async Task<Usuario> ObterPorId(int usuarioId)
+        {
+            return await _contexto.Usuarios
+                            .Where(u => u.Id == usuarioId)
+                            .Where(u => u.Ativo)
+                            .FirstOrDefaultAsync();
+        }
+
+        public async Task RestaurarAsync(Usuario usuario)
+        {
+            usuario.Ativo = true;
+            _contexto.Usuarios.Update(usuario);
+            await _contexto.SaveChangesAsync();
+        }
+
+        public async Task<int> SalvarAsync(Usuario usuario)
+        {
+            await _contexto.Usuarios.AddAsync(usuario);
+            await _contexto.SaveChangesAsync();
+
+            return usuario.Id;
         }
     }
 }

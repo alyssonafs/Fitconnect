@@ -1,6 +1,7 @@
 using FitConnect.Dominio.Entidades;
 using FitConnect.Repositorio.Contexto;
 using FitConnect.Repositorio.DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitConnect.Repositorio.DataAccess
 {
@@ -10,24 +11,36 @@ namespace FitConnect.Repositorio.DataAccess
         {
             
         }
-        public Task AtualizarAsync(TreinoCompartilhado treinoCompartilhado)
+        public async Task AtualizarAsync(TreinoCompartilhado treinoCompartilhado)
         {
-            throw new NotImplementedException();
+            _contexto.TreinosCompartilhados.Update(treinoCompartilhado);
+            await _contexto.SaveChangesAsync();
         }
 
-        public Task<IAsyncEnumerable<TreinoCompartilhado>> ListarAsync()
+        public async Task DeletarAsync(TreinoCompartilhado treinoCompartilhado)
         {
-            throw new NotImplementedException();
+            _contexto.TreinosCompartilhados.Remove(treinoCompartilhado);
+            await _contexto.SaveChangesAsync();
         }
 
-        public Task<TreinoCompartilhado> ObterPorId(int treinoCompartilhadoId)
+        public async Task<IEnumerable<TreinoCompartilhado>> ListarAsync()
         {
-            throw new NotImplementedException();
+            return await _contexto.TreinosCompartilhados.ToListAsync();
         }
 
-        public Task<int> SalvarAsync(TreinoCompartilhado treinoCompartilhado)
+        public async Task<TreinoCompartilhado> ObterPorId(int treinoCompartilhadoId)
         {
-            throw new NotImplementedException();
+            return await _contexto.TreinosCompartilhados
+                            .Where(tc => tc.Id == treinoCompartilhadoId)
+                            .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> SalvarAsync(TreinoCompartilhado treinoCompartilhado)
+        {
+            await _contexto.TreinosCompartilhados.AddAsync(treinoCompartilhado);
+            await _contexto.SaveChangesAsync();
+
+            return treinoCompartilhado.Id;
         }
     }
 }

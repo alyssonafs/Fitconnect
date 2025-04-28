@@ -12,7 +12,13 @@ namespace FitConnect.Repositorio.DataAccess.Interfaces
 
         Task<Usuario> ObterPorEmailAsync(string email);
 
-        Task<IAsyncEnumerable<Usuario>> ListarAsync(bool ativo);
+        Task<IEnumerable<Usuario>> ListarAsync(bool ativo);
+
+        Task DeletarAsync(Usuario usuario);
+
+        Task DeleteLogicoAsync(Usuario usuario);
+
+        Task RestaurarAsync(Usuario usuario);
 
     }
 }

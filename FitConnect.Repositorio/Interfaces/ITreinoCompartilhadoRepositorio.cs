@@ -10,7 +10,9 @@ namespace FitConnect.Repositorio.DataAccess.Interfaces
 
         Task<TreinoCompartilhado> ObterPorId(int treinoCompartilhadoId);
 
-        Task<IAsyncEnumerable<TreinoCompartilhado>> ListarAsync();
+        Task<IEnumerable<TreinoCompartilhado>> ListarAsync();
+
+        Task DeletarAsync(TreinoCompartilhado treinoCompartilhado);
 
     }
 }
