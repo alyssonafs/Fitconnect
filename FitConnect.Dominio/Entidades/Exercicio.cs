@@ -11,5 +11,7 @@ namespace FitConnect.Dominio.Entidades
         public string Descricao { get; set; }
 
         public string VideoURL { get; set; }
+
+        public List<ExercicioTreino> ExerciciosTreino { get; set; }
     }
 }

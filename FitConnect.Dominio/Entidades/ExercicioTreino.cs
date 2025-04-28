@@ -9,5 +9,9 @@ namespace FitConnect.Dominio.Entidades
         public int TreinoId { get; set; }
 
         public int ExercicioId { get; set; }
+
+        public Treino Treino { get; set; }
+
+        public Exercicio Exercicio { get; set; }
     }
 }

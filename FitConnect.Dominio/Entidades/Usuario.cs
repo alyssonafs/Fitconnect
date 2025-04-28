@@ -16,6 +16,10 @@ namespace FitConnect.Dominio.Entidades
 
         public bool Ativo { get; set; }
 
+        public List<TreinoCompartilhado> TreinosCompartilhados { get; set; }
+
+        public List<Treino> Treinos { get; set; }
+
         public Usuario()
         {
             Ativo = true;

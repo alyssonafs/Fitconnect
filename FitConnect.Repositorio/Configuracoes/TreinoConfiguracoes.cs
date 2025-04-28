@@ -13,6 +13,12 @@ namespace FitConnect.Repositorio.Configuracoes
             builder.Property(nameof(Treino.Id)).HasColumnName("Id");
             builder.Property(nameof(Treino.Nome)).HasColumnName("Nome").IsRequired(true);
             builder.Property(nameof(Treino.PersonalId)).HasColumnName("PersonalId").IsRequired(true);
+
+            builder
+                .HasOne(t => t.Personal)
+                .WithMany(u => u.Treinos)
+                .HasForeignKey(t => t.PersonalId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
