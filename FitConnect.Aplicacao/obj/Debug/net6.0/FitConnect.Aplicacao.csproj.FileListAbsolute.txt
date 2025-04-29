@@ -1,0 +1,12 @@
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\bin\Debug\net6.0\FitConnect.Aplicacao.deps.json
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\bin\Debug\net6.0\FitConnect.Aplicacao.dll
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\bin\Debug\net6.0\FitConnect.Aplicacao.pdb
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\obj\Debug\net6.0\FitConnect.Aplicacao.GeneratedMSBuildEditorConfig.editorconfig
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\obj\Debug\net6.0\FitConnect.Aplicacao.AssemblyInfoInputs.cache
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\obj\Debug\net6.0\FitConnect.Aplicacao.AssemblyInfo.cs
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\obj\Debug\net6.0\FitConnect.Aplicacao.csproj.CoreCompileInputs.cache
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\obj\Debug\net6.0\FitConnect.Aplicacao.sourcelink.json
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\obj\Debug\net6.0\FitConnect.Aplicacao.dll
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\obj\Debug\net6.0\refint\FitConnect.Aplicacao.dll
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\obj\Debug\net6.0\FitConnect.Aplicacao.pdb
+C:\Alunos\alyssonsilva\Projeto Final\Fitconnect\FitConnect.Aplicacao\obj\Debug\net6.0\ref\FitConnect.Aplicacao.dll

@@ -24,5 +24,15 @@ namespace FitConnect.Dominio.Entidades
         {
             Ativo = true;
         }
+
+        public void Deletar()
+        {
+            Ativo = false;
+        }
+
+        public void Restaurar()
+        {
+            Ativo = true;
+        }
     }
 }

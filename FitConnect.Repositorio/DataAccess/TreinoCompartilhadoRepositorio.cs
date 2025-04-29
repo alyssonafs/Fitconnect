@@ -1,5 +1,4 @@
 using FitConnect.Dominio.Entidades;
-using FitConnect.Repositorio.Contexto;
 using FitConnect.Repositorio.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +27,7 @@ namespace FitConnect.Repositorio.DataAccess
             return await _contexto.TreinosCompartilhados.ToListAsync();
         }
 
-        public async Task<TreinoCompartilhado> ObterPorId(int treinoCompartilhadoId)
+        public async Task<TreinoCompartilhado> ObterPorIdAsync(int treinoCompartilhadoId)
         {
             return await _contexto.TreinosCompartilhados
                             .Where(tc => tc.Id == treinoCompartilhadoId)

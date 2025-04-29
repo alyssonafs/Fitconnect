@@ -8,7 +8,7 @@ namespace FitConnect.Repositorio.DataAccess.Interfaces
 
         Task AtualizarAsync(Treino treino);
 
-        Task<Treino> ObterPorId(int treinoId);
+        Task<Treino> ObterPorIdAsync(int treinoId);
 
         Task<IEnumerable<Treino>> ListarAsync();
 

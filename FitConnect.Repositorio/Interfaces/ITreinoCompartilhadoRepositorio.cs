@@ -8,7 +8,7 @@ namespace FitConnect.Repositorio.DataAccess.Interfaces
 
         Task AtualizarAsync(TreinoCompartilhado treinoCompartilhado);
 
-        Task<TreinoCompartilhado> ObterPorId(int treinoCompartilhadoId);
+        Task<TreinoCompartilhado> ObterPorIdAsync(int treinoCompartilhadoId);
 
         Task<IEnumerable<TreinoCompartilhado>> ListarAsync();
 

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitConnect.Dominio", "FitCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitConnect.Repositorio", "FitConnect.Repositorio\FitConnect.Repositorio.csproj", "{EA88F352-11BC-471C-9316-4D51912637E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitConnect.Aplicacao", "FitConnect.Aplicacao\FitConnect.Aplicacao.csproj", "{515C2EDE-697A-4858-B95A-02E3F2AB857C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{EA88F352-11BC-471C-9316-4D51912637E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA88F352-11BC-471C-9316-4D51912637E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA88F352-11BC-471C-9316-4D51912637E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{515C2EDE-697A-4858-B95A-02E3F2AB857C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515C2EDE-697A-4858-B95A-02E3F2AB857C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515C2EDE-697A-4858-B95A-02E3F2AB857C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515C2EDE-697A-4858-B95A-02E3F2AB857C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
