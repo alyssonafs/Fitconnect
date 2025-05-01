@@ -23,7 +23,7 @@ namespace FitConnect.Aplicacao
                 throw new Exception("Treino não encontrado!");
             }
 
-            var personalBusca = _usuarioRepositorio.ObterPorIdAsync(treino.PersonalId);
+            var personalBusca = await _usuarioRepositorio.ObterPorIdAsync(treino.PersonalId);
 
             ValidarCamposTreino(treino, personalBusca);
 
@@ -64,7 +64,7 @@ namespace FitConnect.Aplicacao
 
         public async Task<int> CriarAsync(Treino treino)
         {
-            var personalBusca = _usuarioRepositorio.ObterPorIdAsync(treino.PersonalId);
+            var personalBusca = await _usuarioRepositorio.ObterPorIdAsync(treino.PersonalId);
 
             ValidarCamposTreino(treino, personalBusca);
 
@@ -73,7 +73,7 @@ namespace FitConnect.Aplicacao
 
         #region Util
 
-        private static void ValidarCamposTreino(Treino treino, Task<Usuario> personal)
+        private static void ValidarCamposTreino(Treino treino, Usuario personal)
         {
             if (String.IsNullOrEmpty(treino.Nome))
             {

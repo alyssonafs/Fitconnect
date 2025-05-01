@@ -24,8 +24,8 @@ namespace FitConnect.Aplicacao
                 throw new Exception("Treino Compartilhado não encontrado!");
             }
 
-            var treinoBusca = _treinoRepositorio.ObterPorIdAsync(treinoCompartilhado.TreinoId);
-            var alunoBusca = _usuarioRepositorio.ObterPorIdAsync(treinoCompartilhado.AlunoId);
+            var treinoBusca = await _treinoRepositorio.ObterPorIdAsync(treinoCompartilhado.TreinoId);
+            var alunoBusca = await _usuarioRepositorio.ObterPorIdAsync(treinoCompartilhado.AlunoId);
 
             ValidarCamposTreinoCompartilhado(treinoBusca, alunoBusca);
 
@@ -67,8 +67,8 @@ namespace FitConnect.Aplicacao
 
         public async Task<int> CriarAsync(TreinoCompartilhado treinoCompartilhado)
         {
-            var treinoBusca = _treinoRepositorio.ObterPorIdAsync(treinoCompartilhado.TreinoId);
-            var alunoBusca = _usuarioRepositorio.ObterPorIdAsync(treinoCompartilhado.AlunoId);
+            var treinoBusca = await _treinoRepositorio.ObterPorIdAsync(treinoCompartilhado.TreinoId);
+            var alunoBusca = await _usuarioRepositorio.ObterPorIdAsync(treinoCompartilhado.AlunoId);
 
             ValidarCamposTreinoCompartilhado(treinoBusca, alunoBusca);
 
@@ -76,7 +76,7 @@ namespace FitConnect.Aplicacao
         }
         #region Util
 
-        private static void ValidarCamposTreinoCompartilhado(Task<Treino> treino, Task<Usuario> aluno)
+        private static void ValidarCamposTreinoCompartilhado(Treino treino, Usuario aluno)
         {
             if (treino == null)
             {

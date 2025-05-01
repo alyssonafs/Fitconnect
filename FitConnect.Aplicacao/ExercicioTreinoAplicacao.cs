@@ -25,8 +25,8 @@ namespace FitConnect.Aplicacao
                 throw new Exception("ExercicioTreino não encontrado!");
             }
 
-            var treinoBusca = _treinoRepositorio.ObterPorIdAsync(exercicioTreino.TreinoId);
-            var exercicioBusca = _exercicioRepositorio.ObterPorIdAsync(exercicioTreino.ExercicioId);
+            var treinoBusca = await _treinoRepositorio.ObterPorIdAsync(exercicioTreino.TreinoId);
+            var exercicioBusca = await _exercicioRepositorio.ObterPorIdAsync(exercicioTreino.ExercicioId);
 
             ValidarCamposExercicioTreino(exercicioTreino, treinoBusca, exercicioBusca);
 
@@ -39,8 +39,8 @@ namespace FitConnect.Aplicacao
 
         public async Task<int> CriarAsync(ExercicioTreino exercicioTreino)
         {
-            var treinoBusca = _treinoRepositorio.ObterPorIdAsync(exercicioTreino.TreinoId);
-            var exercicioBusca = _exercicioRepositorio.ObterPorIdAsync(exercicioTreino.ExercicioId);
+            var treinoBusca = await _treinoRepositorio.ObterPorIdAsync(exercicioTreino.TreinoId);
+            var exercicioBusca = await _exercicioRepositorio.ObterPorIdAsync(exercicioTreino.ExercicioId);
 
             ValidarCamposExercicioTreino(exercicioTreino, treinoBusca, exercicioBusca);
 
@@ -80,7 +80,7 @@ namespace FitConnect.Aplicacao
 
         #region Util
 
-        private static void ValidarCamposExercicioTreino(ExercicioTreino exercicioTreino, Task<Treino> treino, Task<Exercicio> exercicio)
+        private static void ValidarCamposExercicioTreino(ExercicioTreino exercicioTreino, Treino treino, Exercicio exercicio)
         {
             if (String.IsNullOrEmpty(exercicioTreino.Serie))
             {
