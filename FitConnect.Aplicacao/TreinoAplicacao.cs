@@ -14,24 +14,52 @@ namespace FitConnect.Aplicacao
         }
 
         readonly IUsuarioRepositorio _usuarioRepositorio;
-        public Task AtualizarAsync(Treino treino)
+        public async Task AtualizarAsync(Treino treino)
         {
-            throw new NotImplementedException();
+            var treinoDominio = await _treinoRepositorio.ObterPorIdAsync(treino.Id);
+
+            if (treinoDominio == null)
+            {
+                throw new Exception("Treino não encontrado!");
+            }
+
+            var personalBusca = _usuarioRepositorio.ObterPorIdAsync(treino.PersonalId);
+
+            ValidarCamposTreino(treino, personalBusca);
+
+            treinoDominio.Nome = treino.Nome;
+            treinoDominio.PersonalId = treino.PersonalId;
+
+            await _treinoRepositorio.AtualizarAsync(treinoDominio);
         }
 
-        public Task DeletarAsync(Treino treino)
+        public async Task DeletarAsync(Treino treino)
         {
-            throw new NotImplementedException();
+            var treinoDominio = await _treinoRepositorio.ObterPorIdAsync(treino.Id);
+
+            if (treinoDominio == null)
+            {
+                throw new Exception("Treino não encontrado!");
+            }
+
+            await _treinoRepositorio.DeletarAsync(treinoDominio);
         }
 
-        public Task<IEnumerable<Treino>> ListarAsync()
+        public async Task<IEnumerable<Treino>> ListarAsync()
         {
-            throw new NotImplementedException();
+            return await _treinoRepositorio.ListarAsync();
         }
 
-        public Task<Treino> ObterPorIdAsync(int treinoId)
+        public async Task<Treino> ObterPorIdAsync(int treinoId)
         {
-            throw new NotImplementedException();
+            var treinoDominio = await _treinoRepositorio.ObterPorIdAsync(treinoId);
+
+            if (treinoDominio == null)
+            {
+                throw new Exception("Treino não encontrado!");
+            }
+
+            return treinoDominio;
         }
 
         public async Task<int> CriarAsync(Treino treino)

@@ -18,5 +18,7 @@ namespace FitConnect.Aplicacao.Interfaces
 
         Task RestaurarAsync(int usuarioId);
 
+        Task AlterarSenhaAsync(Usuario usuario, string senhaAntiga);
+
     }
 }

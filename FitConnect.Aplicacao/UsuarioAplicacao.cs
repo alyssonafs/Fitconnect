@@ -14,9 +14,22 @@ namespace FitConnect.Aplicacao
             _usuarioRepositorio = usuarioRepositorio;
         }
 
-        public Task AtualizarAsync(Usuario usuario)
+        public async Task AtualizarAsync(Usuario usuario)
         {
-            throw new NotImplementedException();
+            var usuarioDominio = await _usuarioRepositorio.ObterPorIdAsync(usuario.Id);
+
+            if (usuarioDominio == null)
+            {
+                throw new Exception("Usuário não encontrado!");
+            }
+
+            ValidarCamposUsuario(usuario);
+
+            usuarioDominio.Nome = usuario.Nome;
+            usuarioDominio.Email = usuario.Email;
+            usuarioDominio.TipoUsuario = usuario.TipoUsuario;
+
+            await _usuarioRepositorio.AtualizarAsync(usuarioDominio);
         }
 
         public async Task<int> CriarAsync(Usuario usuario)
@@ -36,29 +49,90 @@ namespace FitConnect.Aplicacao
 
         }
 
-        public Task DeletarAsync(int usuarioId)
+        public async Task DeletarAsync(int usuarioId)
         {
-            throw new NotImplementedException();
+            var usuarioDominio = await _usuarioRepositorio.ObterPorIdAsync(usuarioId);
+
+            if (usuarioDominio.Ativo == false)
+            {
+                throw new Exception("Usuário já deletado!");
+            }
+
+            if (usuarioDominio == null)
+            {
+                throw new Exception("Usuário não encontrado!");
+            }
+
+            usuarioDominio.Deletar();
+
+            await _usuarioRepositorio.AtualizarAsync(usuarioDominio);
         }
 
-        public Task<IEnumerable<Usuario>> ListarAsync(bool ativo)
+        public async Task<IEnumerable<Usuario>> ListarAsync(bool ativo)
         {
-            throw new NotImplementedException();
+            return await _usuarioRepositorio.ListarAsync(ativo);
         }
 
-        public Task<Usuario> ObterPorEmailAsync(string email)
+        public async Task<Usuario> ObterPorEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            var usuarioDominio = await _usuarioRepositorio.ObterPorEmailAsync(email);
+
+            if (usuarioDominio == null)
+            {
+                throw new Exception("Usuário não encontrado!");
+            }
+
+            return usuarioDominio;
         }
 
-        public Task<Usuario> ObterPorIdAsync(int usuarioId)
+        public async Task<Usuario> ObterPorIdAsync(int usuarioId)
         {
-            throw new NotImplementedException();
+            var usuarioDominio = await _usuarioRepositorio.ObterPorIdAsync(usuarioId);
+
+            if (usuarioDominio == null)
+            {
+                throw new Exception("Usuário não encontrado!");
+            }
+
+            return usuarioDominio;
         }
 
-        public Task RestaurarAsync(int usuarioId)
+        public async Task RestaurarAsync(int usuarioId)
         {
-            throw new NotImplementedException();
+            var usuarioDominio = await _usuarioRepositorio.ObterPorIdAsync(usuarioId);
+
+            if (usuarioDominio.Ativo == true)
+            {
+                throw new Exception("Usuário já está ativo!");
+            }
+
+            if (usuarioDominio == null)
+            {
+                throw new Exception("Usuário não encontrado!");
+            }
+
+            usuarioDominio.Restaurar();
+
+            await _usuarioRepositorio.AtualizarAsync(usuarioDominio);
+        }
+
+        public async Task AlterarSenhaAsync(Usuario usuario, string senhaAntiga)
+        {
+            var usuarioDominio = await _usuarioRepositorio.ObterPorIdAsync(usuario.Id);
+
+            if (usuarioDominio == null)
+            {
+                throw new Exception("Usuário não encontrado");
+            }
+
+            if (usuarioDominio.Senha != senhaAntiga)
+            {
+                throw new Exception("Senha antiga inválida");
+            }
+
+            usuarioDominio.Senha = usuario.Senha;
+
+            await _usuarioRepositorio.AtualizarAsync(usuarioDominio);
         }
 
         #region Util

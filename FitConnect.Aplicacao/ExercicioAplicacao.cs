@@ -13,9 +13,27 @@ namespace FitConnect.Aplicacao
             _exercicioRepositorio = exercicioRepositorio;
         }
 
-        public Task AtualizarAsync(Exercicio exercicio)
+        public async Task AtualizarAsync(Exercicio exercicio)
         {
-            throw new NotImplementedException();
+            var exercicioDominio = await _exercicioRepositorio.ObterPorIdAsync(exercicio.Id);
+
+            if (exercicioDominio == null)
+            {
+                throw new Exception("Exercício não encontrado!");
+            }
+
+            exercicioDominio.Nome = exercicio.Nome;
+            exercicioDominio.GrupoMuscular = exercicio.GrupoMuscular;
+
+            if (!String.IsNullOrEmpty(exercicio.Descricao))
+            {
+                exercicioDominio.Descricao = exercicio.Descricao;
+            }
+            
+            if (!String.IsNullOrEmpty(exercicio.VideoURL))    
+            {
+                exercicioDominio.VideoURL = exercicio.VideoURL;
+            }            
         }
 
         public async Task<int> CriarAsync(Exercicio exercicio)
@@ -25,19 +43,33 @@ namespace FitConnect.Aplicacao
             return await _exercicioRepositorio.SalvarAsync(exercicio);
         }
 
-        public Task DeletarAsync(Exercicio exercicio)
+        public async Task DeletarAsync(Exercicio exercicio)
         {
-            throw new NotImplementedException();
+            var exercicioDominio = await _exercicioRepositorio.ObterPorIdAsync(exercicio.Id);
+
+            if (exercicioDominio == null)
+            {
+                throw new Exception("Exercício não encontrado!");
+            }
+
+            await _exercicioRepositorio.DeletarAsync(exercicioDominio);
         }
 
-        public Task<IEnumerable<Exercicio>> ListarAsync()
+        public async Task<IEnumerable<Exercicio>> ListarAsync()
         {
-            throw new NotImplementedException();
+            return await _exercicioRepositorio.ListarAsync();
         }
 
-        public Task<Exercicio> ObterPorIdAsync(int exercicioId)
+        public async Task<Exercicio> ObterPorIdAsync(int exercicioId)
         {
-            throw new NotImplementedException();
+            var exercicioDominio = await _exercicioRepositorio.ObterPorIdAsync(exercicioId);
+
+            if (exercicioDominio == null)
+            {
+                throw new Exception("Exercício não encontrado!");
+            }
+
+            return exercicioDominio;
         }
 
         #region Util

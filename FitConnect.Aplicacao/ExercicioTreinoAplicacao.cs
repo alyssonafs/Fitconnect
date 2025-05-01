@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using FitConnect.Aplicacao.Interfaces;
 using FitConnect.Dominio.Entidades;
 using FitConnect.Repositorio.DataAccess.Interfaces;
@@ -15,9 +16,25 @@ namespace FitConnect.Aplicacao
             _exercicioTreinoRepositorio = exercicioTreinoRepositorio;
         }
 
-        public Task AtualizarAsync(ExercicioTreino exercicioTreino)
+        public async Task AtualizarAsync(ExercicioTreino exercicioTreino)
         {
-            throw new NotImplementedException();
+            var exercicioTreinoDominio = await _exercicioTreinoRepositorio.ObterPorIdAsync(exercicioTreino.Id);
+
+            if (exercicioTreinoDominio == null)
+            {
+                throw new Exception("ExercicioTreino não encontrado!");
+            }
+
+            var treinoBusca = _treinoRepositorio.ObterPorIdAsync(exercicioTreino.TreinoId);
+            var exercicioBusca = _exercicioRepositorio.ObterPorIdAsync(exercicioTreino.ExercicioId);
+
+            ValidarCamposExercicioTreino(exercicioTreino, treinoBusca, exercicioBusca);
+
+            exercicioTreinoDominio.Serie = exercicioTreino.Serie;
+            exercicioTreinoDominio.TreinoId = exercicioTreino.TreinoId;
+            exercicioTreinoDominio.ExercicioId = exercicioTreino.ExercicioId;
+
+            await _exercicioTreinoRepositorio.AtualizarAsync(exercicioTreinoDominio);
         }
 
         public async Task<int> CriarAsync(ExercicioTreino exercicioTreino)
@@ -30,20 +47,36 @@ namespace FitConnect.Aplicacao
             return await _exercicioTreinoRepositorio.SalvarAsync(exercicioTreino);
         }
 
-        public Task DeletarAsync(ExercicioTreino exercicioTreino)
+        public async Task DeletarAsync(ExercicioTreino exercicioTreino)
         {
-            throw new NotImplementedException();
+            var exercicioTreinoDominio = await _exercicioTreinoRepositorio.ObterPorIdAsync(exercicioTreino.Id);
+
+            if (exercicioTreinoDominio == null)
+            {
+                throw new Exception("Exercício Treino não encontrado!");
+            }
+
+            await _exercicioTreinoRepositorio.DeletarAsync(exercicioTreinoDominio);
         }
 
-        public Task<IEnumerable<ExercicioTreino>> ListarAsync()
+        public async Task<IEnumerable<ExercicioTreino>> ListarAsync()
         {
-            throw new NotImplementedException();
+            return await _exercicioTreinoRepositorio.ListarAsync();
         }
 
-        public Task<ExercicioTreino> ObterPorIdAsync(int exercicioTreinoId)
+        public async Task<ExercicioTreino> ObterPorIdAsync(int exercicioTreinoId)
         {
-            throw new NotImplementedException();
+            var exercicioTreinoDominio = await _exercicioTreinoRepositorio.ObterPorIdAsync(exercicioTreinoId);
+
+            if (exercicioTreinoDominio == null)
+            {
+                throw new Exception("Exercício Treino não encontrado!");
+            }
+
+            return exercicioTreinoDominio;
         }
+
+        
 
         #region Util
 
