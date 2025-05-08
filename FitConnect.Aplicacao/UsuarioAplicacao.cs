@@ -23,11 +23,20 @@ namespace FitConnect.Aplicacao
                 throw new Exception("Usuário não encontrado!");
             }
 
-            ValidarCamposUsuario(usuario);
+            if(!String.IsNullOrEmpty(usuario.Nome))
+            {
+                usuarioDominio.Nome = usuario.Nome;
+            }
 
-            usuarioDominio.Nome = usuario.Nome;
-            usuarioDominio.Email = usuario.Email;
-            usuarioDominio.TipoUsuario = usuario.TipoUsuario;
+            if (!String.IsNullOrEmpty(usuario.Email))
+            {
+                usuarioDominio.Email = usuario.Email;
+            }
+
+            if (Enum.IsDefined(typeof(TiposUsuario), usuario.TipoUsuario))
+            {
+                usuarioDominio.TipoUsuario = usuario.TipoUsuario;
+            }
 
             await _usuarioRepositorio.AtualizarAsync(usuarioDominio);
         }
@@ -51,16 +60,16 @@ namespace FitConnect.Aplicacao
 
         public async Task DeletarAsync(int usuarioId)
         {
-            var usuarioDominio = await _usuarioRepositorio.ObterPorIdAsync(usuarioId);
-
-            if (usuarioDominio.Ativo == false)
-            {
-                throw new Exception("Usuário já deletado!");
-            }
+            var usuarioDominio = await _usuarioRepositorio.ObterPorIdTodosAsync(usuarioId);
 
             if (usuarioDominio == null)
             {
                 throw new Exception("Usuário não encontrado!");
+            }
+
+            if (usuarioDominio.Ativo == false)
+            {
+                throw new Exception("Usuário já deletado!");
             }
 
             usuarioDominio.Deletar();
@@ -99,16 +108,16 @@ namespace FitConnect.Aplicacao
 
         public async Task RestaurarAsync(int usuarioId)
         {
-            var usuarioDominio = await _usuarioRepositorio.ObterPorIdAsync(usuarioId);
-
-            if (usuarioDominio.Ativo == true)
-            {
-                throw new Exception("Usuário já está ativo!");
-            }
+            var usuarioDominio = await _usuarioRepositorio.ObterPorIdTodosAsync(usuarioId);            
 
             if (usuarioDominio == null)
             {
                 throw new Exception("Usuário não encontrado!");
+            }
+
+            if (usuarioDominio.Ativo == true)
+            {
+                throw new Exception("Usuário já está ativo!");
             }
 
             usuarioDominio.Restaurar();
@@ -149,7 +158,7 @@ namespace FitConnect.Aplicacao
             }
             if (!Enum.IsDefined(typeof(TiposUsuario), usuario.TipoUsuario))
             {
-                throw new Exception("O campo tipo usuário não pode ser vazio!");
+                throw new Exception("O campo tipo usuário não pode ser vazio ou opção inválida!");
             }
         }
 

@@ -43,6 +43,13 @@ namespace FitConnect.Repositorio.DataAccess
                             .FirstOrDefaultAsync();
         }
 
+        public async Task<Usuario> ObterPorIdTodosAsync(int usuarioId)
+        {
+            return await _contexto.Usuarios
+                            .Where(u => u.Id == usuarioId)
+                            .FirstOrDefaultAsync();
+        }
+
         public async Task<int> SalvarAsync(Usuario usuario)
         {
             await _contexto.Usuarios.AddAsync(usuario);
