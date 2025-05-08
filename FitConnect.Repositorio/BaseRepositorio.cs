@@ -1,4 +1,4 @@
-public class BaseRepositorio
+public abstract class BaseRepositorio
 {
     protected readonly FitConnectContexto _contexto;
 
