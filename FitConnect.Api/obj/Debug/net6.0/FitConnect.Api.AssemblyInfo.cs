@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FitConnect.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+47fcd9dd56adf0a1b64324a33a3173bb2fbfb2f3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56879c97233f98d239d493ff7a93aba9746f5614")]
 [assembly: System.Reflection.AssemblyProductAttribute("FitConnect.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FitConnect.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

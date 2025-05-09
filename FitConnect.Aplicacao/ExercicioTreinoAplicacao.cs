@@ -30,11 +30,20 @@ namespace FitConnect.Aplicacao
             var treinoBusca = await _treinoRepositorio.ObterPorIdAsync(exercicioTreino.TreinoId);
             var exercicioBusca = await _exercicioRepositorio.ObterPorIdAsync(exercicioTreino.ExercicioId);
 
-            ValidarCamposExercicioTreino(exercicioTreino, treinoBusca, exercicioBusca);
+            if (!String.IsNullOrEmpty(exercicioTreino.Serie))
+            {
+                exercicioTreinoDominio.Serie = exercicioTreino.Serie;
+            }
+            
+            if (treinoBusca != null)
+            {
+                exercicioTreinoDominio.TreinoId = exercicioTreino.TreinoId;
+            }
 
-            exercicioTreinoDominio.Serie = exercicioTreino.Serie;
-            exercicioTreinoDominio.TreinoId = exercicioTreino.TreinoId;
-            exercicioTreinoDominio.ExercicioId = exercicioTreino.ExercicioId;
+            if (exercicioBusca != null)
+            {
+                exercicioTreinoDominio.ExercicioId = exercicioTreino.ExercicioId;
+            }            
 
             await _exercicioTreinoRepositorio.AtualizarAsync(exercicioTreinoDominio);
         }
@@ -49,9 +58,9 @@ namespace FitConnect.Aplicacao
             return await _exercicioTreinoRepositorio.SalvarAsync(exercicioTreino);
         }
 
-        public async Task DeletarAsync(ExercicioTreino exercicioTreino)
+        public async Task DeletarAsync(int exercicioTreinoId)
         {
-            var exercicioTreinoDominio = await _exercicioTreinoRepositorio.ObterPorIdAsync(exercicioTreino.Id);
+            var exercicioTreinoDominio = await _exercicioTreinoRepositorio.ObterPorIdAsync(exercicioTreinoId);
 
             if (exercicioTreinoDominio == null)
             {
