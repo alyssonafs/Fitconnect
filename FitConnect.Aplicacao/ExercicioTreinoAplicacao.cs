@@ -11,9 +11,11 @@ namespace FitConnect.Aplicacao
         readonly ITreinoRepositorio _treinoRepositorio;
         readonly IExercicioRepositorio _exercicioRepositorio;
 
-        public ExercicioTreinoAplicacao(IExercicioTreinoRepositorio exercicioTreinoRepositorio)
+        public ExercicioTreinoAplicacao(IExercicioTreinoRepositorio exercicioTreinoRepositorio, IExercicioRepositorio exercicioRepositorio, ITreinoRepositorio treinoRepositorio)
         {
             _exercicioTreinoRepositorio = exercicioTreinoRepositorio;
+            _exercicioRepositorio = exercicioRepositorio;
+            _treinoRepositorio = treinoRepositorio;
         }
 
         public async Task AtualizarAsync(ExercicioTreino exercicioTreino)

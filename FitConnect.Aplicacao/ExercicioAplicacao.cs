@@ -22,8 +22,15 @@ namespace FitConnect.Aplicacao
                 throw new Exception("Exercício não encontrado!");
             }
 
-            exercicioDominio.Nome = exercicio.Nome;
-            exercicioDominio.GrupoMuscular = exercicio.GrupoMuscular;
+            if (!String.IsNullOrEmpty(exercicio.Nome))
+            {
+                exercicioDominio.Nome = exercicio.Nome;
+            }
+
+            if (!String.IsNullOrEmpty(exercicio.GrupoMuscular))
+            {
+                exercicioDominio.GrupoMuscular = exercicio.GrupoMuscular;
+            }            
 
             if (!String.IsNullOrEmpty(exercicio.Descricao))
             {
@@ -34,6 +41,8 @@ namespace FitConnect.Aplicacao
             {
                 exercicioDominio.VideoURL = exercicio.VideoURL;
             }            
+
+            await _exercicioRepositorio.AtualizarAsync(exercicioDominio);
         }
 
         public async Task<int> CriarAsync(Exercicio exercicio)
@@ -43,9 +52,9 @@ namespace FitConnect.Aplicacao
             return await _exercicioRepositorio.SalvarAsync(exercicio);
         }
 
-        public async Task DeletarAsync(Exercicio exercicio)
+        public async Task DeletarAsync(int  exercicioId)
         {
-            var exercicioDominio = await _exercicioRepositorio.ObterPorIdAsync(exercicio.Id);
+            var exercicioDominio = await _exercicioRepositorio.ObterPorIdAsync(exercicioId);
 
             if (exercicioDominio == null)
             {
