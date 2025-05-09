@@ -29,18 +29,23 @@ namespace FitConnect.Aplicacao
             var treinoBusca = await _treinoRepositorio.ObterPorIdAsync(treinoCompartilhado.TreinoId);
             var alunoBusca = await _usuarioRepositorio.ObterPorIdAsync(treinoCompartilhado.AlunoId);
 
-            ValidarCamposTreinoCompartilhado(treinoBusca, alunoBusca);
+            if (treinoBusca != null)
+            {
+                treinoCompartilhadoDominio.TreinoId = treinoCompartilhado.TreinoId;
+            }
 
-            treinoCompartilhadoDominio.TreinoId = treinoCompartilhado.TreinoId;
-            treinoCompartilhadoDominio.AlunoId = treinoCompartilhado.AlunoId;
-
+            if (alunoBusca != null)
+            {
+                treinoCompartilhadoDominio.AlunoId = treinoCompartilhado.AlunoId;
+            }
+            
             await _treinoCompartilhadoRepositorio.AtualizarAsync(treinoCompartilhadoDominio);
 
         }
 
-        public async Task DeletarAsync(TreinoCompartilhado treinoCompartilhado)
+        public async Task DeletarAsync(int treinoCompartilhadoId)
         {
-            var treinoCompartilhadoDominio = await _treinoCompartilhadoRepositorio.ObterPorIdAsync(treinoCompartilhado.Id);
+            var treinoCompartilhadoDominio = await _treinoCompartilhadoRepositorio.ObterPorIdAsync(treinoCompartilhadoId);
 
             if (treinoCompartilhadoDominio == null)
             {
