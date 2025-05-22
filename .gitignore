@@ -1,0 +1,43 @@
+## Ignore arquivos do Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Ignore arquivos de build do .NET
+bin/
+obj/
+out/
+
+## Ignore pacotes NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+## Logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+*.sln.ide
+
+## Configurações de ambiente local
+.env
+*.env.*
+
+## Ignore arquivos de publicação
+publish/
+app.publish/
+
+## Ignore diretórios do Rider (JetBrains)
+.idea/
+*.sln.iml
+
+## Ignore arquivos de cache
+.vscode/
+.vscode/*.code-workspace
+
+## I
