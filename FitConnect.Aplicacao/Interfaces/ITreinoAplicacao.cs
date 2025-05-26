@@ -10,9 +10,11 @@ namespace FitConnect.Aplicacao.Interfaces
 
         Task<Treino> ObterPorIdAsync(int treinoId);
 
-        Task<IEnumerable<Treino>> ListarAsync();
+        Task<IEnumerable<Treino>> ListarAsync(bool ativo);
 
         Task DeletarAsync(int treinoId);
+
+        Task RestaurarAsync(int usuarioId);
 
     }
 }

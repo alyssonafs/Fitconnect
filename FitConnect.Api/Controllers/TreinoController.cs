@@ -101,13 +101,29 @@ namespace FitConnect.Api.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("Listar")]
-        public async Task<ActionResult> Listar()
+        [HttpPut]
+        [Route("Restaurar/{treinoId}")]
+        public async Task<ActionResult> Restaurar([FromRoute] int treinoId)
         {
             try
             {
-                var treinosDominio = await _treinoAplicacao.ListarAsync();
+                await _treinoAplicacao.RestaurarAsync(treinoId);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao restaurar treino: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        [Route("Listar")]
+        public async Task<ActionResult> Listar([FromQuery] bool ativos)
+        {
+            try
+            {
+                var treinosDominio = await _treinoAplicacao.ListarAsync(ativos);
 
                 var treinos = treinosDominio.Select(treino => new TreinoResposta()
                 {

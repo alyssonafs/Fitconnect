@@ -31,7 +31,11 @@ namespace FitConnect.Api.Controllers
                     Id = usuarioDominio.Id,
                     Nome = usuarioDominio.Nome,
                     Email = usuarioDominio.Email,
-                    TipoUsuario = usuarioDominio.TipoUsuario
+                    TipoUsuario = usuarioDominio.TipoUsuario,
+                    Genero = usuarioDominio.Genero,
+                    DataNascimento = usuarioDominio.DataNascimento,
+                    Peso = usuarioDominio.Peso,
+                    Altura = usuarioDominio.Altura
                 };
 
                 return Ok(usuarioResposta);
@@ -53,7 +57,11 @@ namespace FitConnect.Api.Controllers
                     Nome = usuarioCriar.Nome,
                     Email = usuarioCriar.Email,
                     Senha = usuarioCriar.Senha,
-                    TipoUsuario = usuarioCriar.TipoUsuario
+                    TipoUsuario = usuarioCriar.TipoUsuario,
+                    Genero = usuarioCriar.Genero,
+                    DataNascimento = usuarioCriar.DataNascimento,
+                    Peso = usuarioCriar.Peso,
+                    Altura = usuarioCriar.Altura
                 };
 
                 var usuarioId = await _usuarioAplicacao.CriarAsync(usuarioDominio);
@@ -77,7 +85,11 @@ namespace FitConnect.Api.Controllers
                     Id = usuarioAtualizar.Id,
                     Nome = usuarioAtualizar.Nome,
                     Email = usuarioAtualizar.Email,
-                    TipoUsuario = usuarioAtualizar.TipoUsuario
+                    TipoUsuario = usuarioAtualizar.TipoUsuario,
+                    Genero = usuarioAtualizar.Genero,
+                    DataNascimento = usuarioAtualizar.DataNascimento,
+                    Peso = usuarioAtualizar.Peso,
+                    Altura = usuarioAtualizar.Altura
                 };
 
                 await _usuarioAplicacao.AtualizarAsync(usuarioDominio);
@@ -157,7 +169,11 @@ namespace FitConnect.Api.Controllers
                     Id = usuario.Id,
                     Nome = usuario.Nome,
                     Email = usuario.Email,
-                    TipoUsuario = usuario.TipoUsuario
+                    TipoUsuario = usuario.TipoUsuario,
+                    Genero = usuario.Genero,
+                    DataNascimento = usuario.DataNascimento,
+                    Peso = usuario.Peso,
+                    Altura = usuario.Altura
                 }).ToList();
 
                 return Ok(usuarios);

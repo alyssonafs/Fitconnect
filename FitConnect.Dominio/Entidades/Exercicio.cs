@@ -12,6 +12,23 @@ namespace FitConnect.Dominio.Entidades
 
         public string VideoURL { get; set; }
 
+        public bool Ativo { get; set; }
+
         public List<ExercicioTreino> ExerciciosTreino { get; set; }
+
+        public Exercicio()
+        {
+            Ativo = true;
+        }
+
+        public void Deletar()
+        {
+            Ativo = false;
+        }
+
+        public void Restaurar()
+        {
+            Ativo = true;
+        }
     }
 }

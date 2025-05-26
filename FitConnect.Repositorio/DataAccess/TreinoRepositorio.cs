@@ -22,9 +22,9 @@ namespace FitConnect.Repositorio.DataAccess
             await _contexto.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Treino>> ListarAsync()
+        public async Task<IEnumerable<Treino>> ListarAsync(bool ativo)
         {
-            return await _contexto.Treinos.ToListAsync();
+            return await _contexto.Treinos.Where(t => t.Ativo == ativo).ToListAsync();
         }
 
         public async Task<Treino> ObterPorIdAsync(int treinoId)

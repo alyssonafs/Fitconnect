@@ -50,12 +50,38 @@ namespace FitConnect.Aplicacao
                 throw new Exception("Treino não encontrado!");
             }
 
-            await _treinoRepositorio.DeletarAsync(treinoDominio);
+            if (treinoDominio.Ativo == false)
+            {
+                throw new Exception("Treino já deletado!");
+            }
+
+            treinoDominio.Deletar();
+
+            await _treinoRepositorio.AtualizarAsync(treinoDominio);
         }
 
-        public async Task<IEnumerable<Treino>> ListarAsync()
+        public async Task RestaurarAsync(int treinoId)
         {
-            return await _treinoRepositorio.ListarAsync();
+            var treinoDominio = await _treinoRepositorio.ObterPorIdAsync(treinoId);
+
+            if (treinoDominio == null)
+            {
+                throw new Exception("Treino não encontrado!");
+            }
+
+            if (treinoDominio.Ativo == true)
+            {
+                throw new Exception("Treino já está ativo!");
+            }
+
+            treinoDominio.Restaurar();
+
+            await _treinoRepositorio.AtualizarAsync(treinoDominio);
+        }
+
+        public async Task<IEnumerable<Treino>> ListarAsync(bool ativo)
+        {
+            return await _treinoRepositorio.ListarAsync(ativo);
         }
 
         public async Task<Treino> ObterPorIdAsync(int treinoId)

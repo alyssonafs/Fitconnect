@@ -38,6 +38,26 @@ namespace FitConnect.Aplicacao
                 usuarioDominio.TipoUsuario = usuario.TipoUsuario;
             }
 
+            if (Enum.IsDefined(typeof(TiposGenero), usuario.Genero))
+            {
+                usuarioDominio.Genero = usuario.Genero;
+            }
+
+            if (!String.IsNullOrEmpty(usuario.DataNascimento.ToString()))
+            {
+                usuarioDominio.DataNascimento = usuario.DataNascimento;
+            }
+
+            if (!String.IsNullOrEmpty(usuario.Peso.ToString()))
+            {
+                usuarioDominio.Peso = usuario.Peso;
+            }
+
+            if (!String.IsNullOrEmpty(usuario.Altura.ToString()))
+            {
+                usuarioDominio.Altura = usuario.Altura;
+            }
+
             await _usuarioRepositorio.AtualizarAsync(usuarioDominio);
         }
 
@@ -159,6 +179,14 @@ namespace FitConnect.Aplicacao
             if (!Enum.IsDefined(typeof(TiposUsuario), usuario.TipoUsuario))
             {
                 throw new Exception("O campo tipo usuário não pode ser vazio ou opção inválida!");
+            }
+            if (!Enum.IsDefined(typeof(TiposGenero), usuario.Genero))
+            {
+                throw new Exception("O campo gênero não pode ser vazio ou opção inválida!");
+            }
+            if (String.IsNullOrEmpty(usuario.DataNascimento.ToString()))
+            {
+                throw new Exception("O campo data de nascimento não pode ser vazio!");
             }
         }
 

@@ -12,7 +12,15 @@ namespace FitConnect.Dominio.Entidades
 
         public string Senha { get; set; }
 
+        public DateTime DataNascimento { get; set; }
+
+        public TiposGenero Genero { get; set; }
+
         public TiposUsuario TipoUsuario { get; set; }
+
+        public double Peso { get; set; }
+
+        public double Altura { get; set; }
 
         public bool Ativo { get; set; }
 
@@ -33,6 +41,12 @@ namespace FitConnect.Dominio.Entidades
         public void Restaurar()
         {
             Ativo = true;
+        }
+
+        public double IMC()
+        {
+            var imc = this.Peso / (this.Altura * this.Altura);
+            return imc;
         }
     }
 }

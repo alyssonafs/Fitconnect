@@ -15,6 +15,10 @@ namespace FitConnect.Repositorio.Configuracoes
             builder.Property(nameof(Usuario.Email)).HasColumnName("Email").IsRequired(true);
             builder.Property(nameof(Usuario.Senha)).HasColumnName("Senha").IsRequired(true);
             builder.Property(nameof(Usuario.TipoUsuario)).HasColumnName("TipoUsuario").IsRequired(true);
+            builder.Property(nameof(Usuario.Genero)).HasColumnName("Genero").IsRequired(true);
+            builder.Property(nameof(Usuario.DataNascimento)).HasColumnName("DataNascimento").IsRequired(true);
+            builder.Property(nameof(Usuario.Peso)).HasColumnName("Peso");
+            builder.Property(nameof(Usuario.Altura)).HasColumnName("Altura");
             builder.Property(nameof(Usuario.Ativo)).HasColumnName("Ativo").IsRequired(true);
         }
     }

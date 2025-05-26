@@ -15,6 +15,7 @@ namespace FitConnect.Repositorio.Configuracoes
             builder.Property(nameof(Exercicio.GrupoMuscular)).HasColumnName("GrupoMuscular").IsRequired(true);
             builder.Property(nameof(Exercicio.Descricao)).HasColumnName("Descricao");
             builder.Property(nameof(Exercicio.VideoURL)).HasColumnName("VideoURL");
+            builder.Property(nameof(Exercicio.Ativo)).HasColumnName("Ativo").IsRequired(true);
         }
     }
 }
