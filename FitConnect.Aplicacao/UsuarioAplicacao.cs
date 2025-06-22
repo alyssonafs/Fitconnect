@@ -23,7 +23,7 @@ namespace FitConnect.Aplicacao
                 throw new Exception("Usuário não encontrado!");
             }
 
-            if(!String.IsNullOrEmpty(usuario.Nome))
+            if (!String.IsNullOrEmpty(usuario.Nome))
             {
                 usuarioDominio.Nome = usuario.Nome;
             }
@@ -71,6 +71,8 @@ namespace FitConnect.Aplicacao
             {
                 throw new Exception("Campo senha não pode ser vazio!");
             }
+
+            usuario.Senha = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
 
             ValidarCamposUsuario(usuario);
 
@@ -128,7 +130,7 @@ namespace FitConnect.Aplicacao
 
         public async Task RestaurarAsync(int usuarioId)
         {
-            var usuarioDominio = await _usuarioRepositorio.ObterPorIdTodosAsync(usuarioId);            
+            var usuarioDominio = await _usuarioRepositorio.ObterPorIdTodosAsync(usuarioId);
 
             if (usuarioDominio == null)
             {
@@ -154,12 +156,12 @@ namespace FitConnect.Aplicacao
                 throw new Exception("Usuário não encontrado");
             }
 
-            if (usuarioDominio.Senha != senhaAntiga)
+            if (!BCrypt.Net.BCrypt.Verify(senhaAntiga, usuarioDominio.Senha))
             {
                 throw new Exception("Senha antiga inválida");
             }
 
-            usuarioDominio.Senha = usuario.Senha;
+            usuarioDominio.Senha = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
 
             await _usuarioRepositorio.AtualizarAsync(usuarioDominio);
         }
@@ -175,10 +177,6 @@ namespace FitConnect.Aplicacao
             if (String.IsNullOrEmpty(usuario.Email))
             {
                 throw new Exception("O campo e-mail não pode ser vazio!");
-            }
-            if (!Enum.IsDefined(typeof(TiposUsuario), usuario.TipoUsuario))
-            {
-                throw new Exception("O campo tipo usuário não pode ser vazio ou opção inválida!");
             }
             if (!Enum.IsDefined(typeof(TiposGenero), usuario.Genero))
             {
