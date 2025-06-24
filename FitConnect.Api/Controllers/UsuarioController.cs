@@ -100,7 +100,7 @@ namespace FitConnect.Api.Controllers
             {
                 return BadRequest($"Erro ao atualizar usuário: {ex.Message}");
             }
-        } 
+        }
 
         [HttpPut]
         [Route("AlterarSenha")]
@@ -192,17 +192,40 @@ namespace FitConnect.Api.Controllers
             {
                 var tiposUsuarios = Enum.GetValues(typeof(TiposUsuario))
                                         .Cast<TiposUsuario>()
+                                        .Select(t => new
+                                        {
+                                            id = (int)t,
+                                            nome = t.ToString()
+                                        })
+                                        .ToList();
+
+                return Ok(tiposUsuarios);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao listar os tipos de usuários: {ex.Message}");
+            }
+        }
+        
+        [HttpGet]
+        [Route("ListarTiposGeneros")]
+        public ActionResult ListarTiposGeneros()
+        {
+            try
+            {
+                var tiposGeneros = Enum.GetValues(typeof(TiposGenero))
+                                        .Cast<TiposGenero>()
                                         .Select(t => new 
                                         {
                                             id = (int)t, nome = t.ToString()
                                         })
                                         .ToList();
                 
-                return Ok(tiposUsuarios);
+                return Ok(tiposGeneros);
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro ao listar os tipos de usuários: {ex.Message}");
+                return BadRequest($"Erro ao listar os tipos de gêneros: {ex.Message}");
             }
         }
     }
