@@ -38,9 +38,8 @@ namespace FitConnect.Repositorio.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Descricao");
 
-                    b.Property<string>("GrupoMuscular")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("GrupoMuscular")
+                        .HasColumnType("int")
                         .HasColumnName("GrupoMuscular");
 
                     b.Property<string>("Nome")

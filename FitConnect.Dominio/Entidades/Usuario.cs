@@ -31,7 +31,6 @@ namespace FitConnect.Dominio.Entidades
         public Usuario()
         {
             Ativo = true;
-            TipoUsuario = 0;
         }
 
         public void Deletar()

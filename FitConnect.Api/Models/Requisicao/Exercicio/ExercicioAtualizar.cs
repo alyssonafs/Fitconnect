@@ -1,3 +1,5 @@
+using FitConnect.Dominio.Enumeradores;
+
 namespace FitConnect.Api.Models.Requisicao.Exercicio
 {
     public class ExercicioAtualizar
@@ -6,7 +8,7 @@ namespace FitConnect.Api.Models.Requisicao.Exercicio
 
         public string Nome { get; set; }
 
-        public string GrupoMuscular { get; set; }
+        public TiposGruposMusculares GrupoMuscular { get; set; }
 
         public string Descricao { get; set; }
 

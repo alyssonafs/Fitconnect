@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitConnect.Repositorio.Migrations
 {
     [DbContext(typeof(FitConnectContexto))]
-    [Migration("20250505224015_Inicial")]
+    [Migration("20250627011128_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,13 +32,16 @@ namespace FitConnect.Repositorio.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit")
+                        .HasColumnName("Ativo");
+
                     b.Property<string>("Descricao")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Descricao");
 
-                    b.Property<string>("GrupoMuscular")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("GrupoMuscular")
+                        .HasColumnType("int")
                         .HasColumnName("GrupoMuscular");
 
                     b.Property<string>("Nome")
@@ -93,6 +96,10 @@ namespace FitConnect.Repositorio.Migrations
                         .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit")
+                        .HasColumnName("Ativo");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -149,19 +156,35 @@ namespace FitConnect.Repositorio.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<double>("Altura")
+                        .HasColumnType("float")
+                        .HasColumnName("Altura");
+
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit")
                         .HasColumnName("Ativo");
+
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DataNascimento");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Email");
 
+                    b.Property<int>("Genero")
+                        .HasColumnType("int")
+                        .HasColumnName("Genero");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Nome");
+
+                    b.Property<double>("Peso")
+                        .HasColumnType("float")
+                        .HasColumnName("Peso");
 
                     b.Property<string>("Senha")
                         .IsRequired()

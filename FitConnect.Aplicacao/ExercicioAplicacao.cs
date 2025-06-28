@@ -1,5 +1,6 @@
 using FitConnect.Aplicacao.Interfaces;
 using FitConnect.Dominio.Entidades;
+using FitConnect.Dominio.Enumeradores;
 using FitConnect.Repositorio.DataAccess.Interfaces;
 
 namespace FitConnect.Aplicacao
@@ -27,10 +28,10 @@ namespace FitConnect.Aplicacao
                 exercicioDominio.Nome = exercicio.Nome;
             }
 
-            if (!String.IsNullOrEmpty(exercicio.GrupoMuscular))
+            if (Enum.IsDefined(typeof(TiposGruposMusculares), exercicio.GrupoMuscular))
             {
                 exercicioDominio.GrupoMuscular = exercicio.GrupoMuscular;
-            }            
+            }          
 
             if (!String.IsNullOrEmpty(exercicio.Descricao))
             {
@@ -115,7 +116,7 @@ namespace FitConnect.Aplicacao
             {
                 throw new Exception("O campo nome não pode ser vazio!");
             }
-            if (String.IsNullOrEmpty(exercicio.GrupoMuscular))
+            if (!Enum.IsDefined(typeof(TiposGruposMusculares), exercicio.GrupoMuscular))
             {
                 throw new Exception("O campo grupo muscular não pode ser vazio!");
             }

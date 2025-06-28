@@ -16,9 +16,10 @@ namespace FitConnect.Repositorio.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GrupoMuscular = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GrupoMuscular = table.Column<int>(type: "int", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VideoURL = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    VideoURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,7 +35,11 @@ namespace FitConnect.Repositorio.Migrations
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Genero = table.Column<int>(type: "int", nullable: false),
                     TipoUsuario = table.Column<int>(type: "int", nullable: false),
+                    Peso = table.Column<double>(type: "float", nullable: false),
+                    Altura = table.Column<double>(type: "float", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -49,7 +54,8 @@ namespace FitConnect.Repositorio.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonalId = table.Column<int>(type: "int", nullable: false)
+                    PersonalId = table.Column<int>(type: "int", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

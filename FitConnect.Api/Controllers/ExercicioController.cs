@@ -2,6 +2,7 @@ using FitConnect.Api.Models.Requisicao.Exercicio;
 using FitConnect.Api.Models.Resposta.Exercicio;
 using FitConnect.Aplicacao.Interfaces;
 using FitConnect.Dominio.Entidades;
+using FitConnect.Dominio.Enumeradores;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitConnect.Api.Controllers
@@ -145,6 +146,28 @@ namespace FitConnect.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest($"Erro ao listar exercícios: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        [Route("ListarTiposGruposMusculares")]
+        public ActionResult ListarTiposGruposMusculares()
+        {
+            try
+            {
+                var tipoGruposMusculares = Enum.GetValues(typeof(TiposGruposMusculares))
+                                        .Cast<TiposGruposMusculares>()
+                                        .Select(t => new 
+                                        {
+                                            id = (int)t, nome = t.ToString()
+                                        })
+                                        .ToList();
+                
+                return Ok(tipoGruposMusculares);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao listar os tipos de grupos musculares: {ex.Message}");
             }
         }
     }
