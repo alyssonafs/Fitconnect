@@ -71,8 +71,7 @@ namespace FitConnect.Api.Controllers
                 var treinoDominio = new Treino()
                 {
                     Id = treinoAtualizar.Id,
-                    Nome = treinoAtualizar.Nome,
-                    PersonalId = treinoAtualizar.PersonalId
+                    Nome = treinoAtualizar.Nome
                 };
 
                 await _treinoAplicacao.AtualizarAsync(treinoDominio);
@@ -137,6 +136,29 @@ namespace FitConnect.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest($"Erro ao listar treinos: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        [Route("Listar/Personal")]
+        public async Task<ActionResult> ListarPersonal([FromQuery] int personalId)
+        {
+            try
+            {
+                var treinosDominio = await _treinoAplicacao.ListarTreinosPersonal(personalId);
+
+                var treinos = treinosDominio.Select(treino => new TreinoResposta()
+                {
+                    Id = treino.Id,
+                    Nome = treino.Nome,
+                    PersonalId = treino.PersonalId
+                }).ToList();
+
+                return Ok(treinos);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao listar treinos do personal: {ex.Message}");
             }
 
         }

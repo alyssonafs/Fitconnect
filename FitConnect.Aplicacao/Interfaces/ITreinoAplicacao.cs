@@ -12,6 +12,8 @@ namespace FitConnect.Aplicacao.Interfaces
 
         Task<IEnumerable<Treino>> ListarAsync(bool ativo);
 
+        Task<IEnumerable<Treino>> ListarTreinosPersonal(int personalId);
+
         Task DeletarAsync(int treinoId);
 
         Task RestaurarAsync(int usuarioId);

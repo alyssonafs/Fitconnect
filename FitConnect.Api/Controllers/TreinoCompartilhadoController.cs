@@ -111,7 +111,7 @@ namespace FitConnect.Api.Controllers
                 var treinosCompartilhadosDominio = await _treinoCompartilhadoAplicacao.ListarAsync();
 
                 var treinosCompartilhados = treinosCompartilhadosDominio.Select(treinoCompartilhado => new TreinoCompartilhadoResposta()
-                {  
+                {
                     Id = treinoCompartilhado.Id,
                     TreinoId = treinoCompartilhado.TreinoId,
                     AlunoId = treinoCompartilhado.AlunoId,
@@ -124,6 +124,30 @@ namespace FitConnect.Api.Controllers
             {
                 return BadRequest($"Erro ao listar treinos compartilhados: {ex.Message}");
             }
+        }
+        
+        [HttpGet]
+        [Route("Listar/Aluno")]
+        public async Task<ActionResult> ListarPersonal([FromQuery] int alunoId)
+        {
+            try
+            {
+                var treinosCompartilhadosDominio = await _treinoCompartilhadoAplicacao.ListarTreinosAluno(alunoId);
+
+                var treinos = treinosCompartilhadosDominio.Select(treino => new TreinoCompartilhadoResposta()
+                {
+                    Id = treino.Id,
+                    TreinoId = treino.TreinoId,
+                    AlunoId = treino.AlunoId
+                }).ToList();
+
+                return Ok(treinos);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao listar treinos do personal: {ex.Message}");
+            }
+
         }
     }
 }

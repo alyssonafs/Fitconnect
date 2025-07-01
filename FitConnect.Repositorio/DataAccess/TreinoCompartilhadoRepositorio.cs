@@ -27,6 +27,13 @@ namespace FitConnect.Repositorio.DataAccess
             return await _contexto.TreinosCompartilhados.ToListAsync();
         }
 
+        public async Task<IEnumerable<TreinoCompartilhado>> ListarTreinosAluno(int alunoId)
+        {
+            return await _contexto.TreinosCompartilhados.Where(t => t.AlunoId == alunoId)
+                                                        .ToListAsync();
+
+        }
+
         public async Task<TreinoCompartilhado> ObterPorIdAsync(int treinoCompartilhadoId)
         {
             return await _contexto.TreinosCompartilhados

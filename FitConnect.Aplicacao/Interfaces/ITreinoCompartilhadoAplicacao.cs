@@ -12,6 +12,8 @@ namespace FitConnect.Aplicacao.Interfaces
 
         Task<IEnumerable<TreinoCompartilhado>> ListarAsync();
 
+        Task<IEnumerable<TreinoCompartilhado>> ListarTreinosAluno(int alunoId);
+
         Task DeletarAsync(int treinoCompartilhadoId);
 
     }

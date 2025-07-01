@@ -84,6 +84,11 @@ namespace FitConnect.Aplicacao
             return await _treinoRepositorio.ListarAsync(ativo);
         }
 
+        public async Task<IEnumerable<Treino>> ListarTreinosPersonal(int personalId)
+        {
+            return await _treinoRepositorio.ListarTreinosPersonal(personalId);
+        }
+
         public async Task<Treino> ObterPorIdAsync(int treinoId)
         {
             var treinoDominio = await _treinoRepositorio.ObterPorIdAsync(treinoId);

@@ -1,3 +1,4 @@
+using System.Formats.Asn1;
 using FitConnect.Dominio.Entidades;
 using FitConnect.Repositorio.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,13 @@ namespace FitConnect.Repositorio.DataAccess
         public async Task<IEnumerable<Treino>> ListarAsync(bool ativo)
         {
             return await _contexto.Treinos.Where(t => t.Ativo == ativo).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Treino>> ListarTreinosPersonal(int personalId)
+        {
+            return await _contexto.Treinos.Where(t => t.PersonalId == personalId)
+                                            .Where(t => t.Ativo == true)
+                                            .ToListAsync();
         }
 
         public async Task<Treino> ObterPorIdAsync(int treinoId)
