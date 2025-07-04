@@ -31,6 +31,7 @@ namespace FitConnect.Repositorio.DataAccess
         public async Task<IEnumerable<Treino>> ListarTreinosPersonal(int personalId)
         {
             return await _contexto.Treinos.Where(t => t.PersonalId == personalId)
+                                            .Include(t => t.ExerciciosTreino)
                                             .Where(t => t.Ativo == true)
                                             .ToListAsync();
         }
@@ -38,6 +39,7 @@ namespace FitConnect.Repositorio.DataAccess
         public async Task<Treino> ObterPorIdAsync(int treinoId)
         {
             return await _contexto.Treinos
+                            .Include(t => t.ExerciciosTreino)
                             .Where(t => t.Id == treinoId)
                             .FirstOrDefaultAsync();
         }

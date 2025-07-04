@@ -11,10 +11,12 @@ namespace FitConnect.Api.Controllers
     public class TreinoController : ControllerBase
     {
         private readonly ITreinoAplicacao _treinoAplicacao;
+        private readonly IUsuarioAplicacao _usuarioAplicacao;
 
-        public TreinoController(ITreinoAplicacao treinoAplicacao)
+        public TreinoController(ITreinoAplicacao treinoAplicacao, IUsuarioAplicacao usuarioAplicacao)
         {
             _treinoAplicacao = treinoAplicacao;
+            _usuarioAplicacao = usuarioAplicacao;
         }
 
         [HttpGet]
@@ -25,11 +27,17 @@ namespace FitConnect.Api.Controllers
             {
                 var treinoDominio = await _treinoAplicacao.ObterPorIdAsync(treinoId);
 
-                var treinoResposta = new TreinoResposta()
+                var personal = await _usuarioAplicacao.ObterPorIdAsync(treinoDominio.PersonalId);
+                var quantidadeExercicios = treinoDominio.ExerciciosTreino?.Count() ?? 0;
+
+                var treinoResposta = new TreinoRespostaLista()
                 {
                     Id = treinoDominio.Id,
                     Nome = treinoDominio.Nome,
-                    PersonalId = treinoDominio.PersonalId
+                    PersonalId = treinoDominio.PersonalId,
+                    PersonalNome = personal?.Nome ?? "Desconhecido",
+                    QuantidadeExercicios = quantidadeExercicios,
+                    TempoEstimado = quantidadeExercicios * 5
                 };
 
                 return Ok(treinoResposta);
@@ -147,11 +155,16 @@ namespace FitConnect.Api.Controllers
             {
                 var treinosDominio = await _treinoAplicacao.ListarTreinosPersonal(personalId);
 
-                var treinos = treinosDominio.Select(treino => new TreinoResposta()
+                var personal = await _usuarioAplicacao.ObterPorIdAsync(personalId);
+
+                var treinos = treinosDominio.Select(treino => new TreinoRespostaLista()
                 {
                     Id = treino.Id,
                     Nome = treino.Nome,
-                    PersonalId = treino.PersonalId
+                    PersonalId = treino.PersonalId,
+                    PersonalNome = personal?.Nome ?? "Desconhecido",
+                    QuantidadeExercicios = treino.ExerciciosTreino?.Count() ?? 0,
+                    TempoEstimado = (treino.ExerciciosTreino?.Count() ?? 0) * 5
                 }).ToList();
 
                 return Ok(treinos);
