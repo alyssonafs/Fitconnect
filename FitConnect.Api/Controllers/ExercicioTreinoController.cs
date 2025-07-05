@@ -49,7 +49,6 @@ namespace FitConnect.Api.Controllers
             {
                 var exercicioTreinoDominio = new ExercicioTreino()
                 {
-                    Id = exercicioTreinoCriar.Id,
                     Serie = exercicioTreinoCriar.Serie,
                     TreinoId = exercicioTreinoCriar.TreinoId,
                     ExercicioId = exercicioTreinoCriar.ExercicioId
