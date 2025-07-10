@@ -34,7 +34,7 @@ namespace FitConnect.Aplicacao
             {
                 exercicioTreinoDominio.Serie = exercicioTreino.Serie;
             }
-            
+
             if (treinoBusca != null)
             {
                 exercicioTreinoDominio.TreinoId = exercicioTreino.TreinoId;
@@ -43,7 +43,7 @@ namespace FitConnect.Aplicacao
             if (exercicioBusca != null)
             {
                 exercicioTreinoDominio.ExercicioId = exercicioTreino.ExercicioId;
-            }            
+            }
 
             await _exercicioTreinoRepositorio.AtualizarAsync(exercicioTreinoDominio);
         }
@@ -87,7 +87,35 @@ namespace FitConnect.Aplicacao
             return exercicioTreinoDominio;
         }
 
-        
+        public async Task DeletarPorTreinoEExercicioAsync(int treinoId, int exercicioId)
+        {
+            var exercicioTreino = await _exercicioTreinoRepositorio.ObterPorTreinoEExercicioAsync(treinoId, exercicioId);
+
+            if (exercicioTreino == null)
+            {
+                throw new Exception("Exercício não encontrado no treino.");
+            }
+
+            await _exercicioTreinoRepositorio.DeletarAsync(exercicioTreino);
+        }
+
+        public async Task<List<ExercicioTreinoDto>> ListarPorTreinoAsync(int treinoId)
+        {
+            var lista = await _exercicioTreinoRepositorio.ListarPorTreinoAsync(treinoId);
+
+            return lista.Select(e => new ExercicioTreinoDto
+            {
+                Id = e.Id,
+                ExercicioId = e.ExercicioId,
+                TreinoId = e.TreinoId,
+                Nome = e.Exercicio.Nome,
+                GrupoMuscular = e.Exercicio.GrupoMuscular,
+                Descricao = e.Exercicio.Descricao,
+                VideoURL = e.Exercicio.VideoURL,
+                Series = e.Serie
+            }).ToList();
+        }
+
 
         #region Util
 

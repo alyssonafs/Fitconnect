@@ -127,5 +127,27 @@ namespace FitConnect.Api.Controllers
                 return BadRequest($"Erro ao listar exercícios treinos: {ex.Message}");
             }
         }
+
+        [HttpDelete]
+        [Route("RemoverExercicio")]
+        public async Task<IActionResult> RemoverExercicio([FromQuery] int treinoId, [FromQuery] int exercicioId)
+        {
+            try
+            {
+                await _exercicioTreinoAplicacao.DeletarPorTreinoEExercicioAsync(treinoId, exercicioId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao remover exercício do treino: {ex.Message}");
+            }
+        }
+
+        [HttpGet("ListarPorTreino/{treinoId}")]
+        public async Task<IActionResult> ListarPorTreino(int treinoId)
+        {
+            var lista = await _exercicioTreinoAplicacao.ListarPorTreinoAsync(treinoId);
+            return Ok(lista);
+        }
     }
 }

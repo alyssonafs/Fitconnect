@@ -27,7 +27,7 @@ public class FitConnectContexto : DbContext
     {
         if (_options == null)
         {
-            var connectionString = "Server=NOTE-AFS\\SQLEXPRESS;Database=Fitconnect;TrustServerCertificate=True;Trusted_Connection=True;";
+            var connectionString = "Server=NOTE264\\SQLEXPRESS;Database=Fitconnect;TrustServerCertificate=True;Trusted_Connection=True;";
             optionsBuilder.UseSqlServer(connectionString);
         }
     }

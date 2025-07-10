@@ -14,5 +14,9 @@ namespace FitConnect.Repositorio.DataAccess.Interfaces
 
         Task DeletarAsync(ExercicioTreino exercicioTreino);
 
+        Task<ExercicioTreino> ObterPorTreinoEExercicioAsync(int treinoId, int exercicioId);
+
+        Task<List<ExercicioTreino>> ListarPorTreinoAsync(int treinoId);
+
     }
 }
