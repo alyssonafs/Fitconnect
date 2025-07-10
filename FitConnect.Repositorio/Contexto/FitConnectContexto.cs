@@ -39,6 +39,9 @@ public class FitConnectContexto : DbContext
         modelBuilder.ApplyConfiguration(new ExercicioConfiguracoes());
         modelBuilder.ApplyConfiguration(new TreinoCompartilhadoConfiguracoes());
         modelBuilder.ApplyConfiguration(new ExercicioTreinoConfiguracoes());
+
+        base.OnModelCreating(modelBuilder);
+        ExercicioSeeder.Seed(modelBuilder);
     }
 
 }
