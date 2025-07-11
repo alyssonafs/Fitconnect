@@ -1,6 +1,5 @@
 using FitConnect.Aplicacao.Interfaces;
 using FitConnect.Dominio.Entidades;
-using FitConnect.Dominio.Enumeradores;
 using FitConnect.Repositorio.DataAccess.Interfaces;
 
 namespace FitConnect.Aplicacao
@@ -30,13 +29,13 @@ namespace FitConnect.Aplicacao
             {
                 treinoDominio.Nome = treino.Nome;
             }
-            if(personalBusca != null)
+            if (personalBusca != null)
             {
                 if (personalBusca.TipoUsuario == 0)
                 {
                     treinoDominio.PersonalId = treino.PersonalId;
                 }
-            }            
+            }
 
             await _treinoRepositorio.AtualizarAsync(treinoDominio);
         }
@@ -103,11 +102,16 @@ namespace FitConnect.Aplicacao
 
         public async Task<int> CriarAsync(Treino treino)
         {
-           var personalBusca = await _usuarioRepositorio.ObterPorIdAsync(treino.PersonalId);
+            var personalBusca = await _usuarioRepositorio.ObterPorIdAsync(treino.PersonalId);
 
-           ValidarCamposTreino(treino, personalBusca);
+            ValidarCamposTreino(treino, personalBusca);
 
             return await _treinoRepositorio.SalvarAsync(treino);
+        }
+
+        public async Task<IEnumerable<TreinoStoredProcedure>> ListarPorGrupoMuscularAsync(int grupoMuscular)
+        {
+            return await _treinoRepositorio.ListarPorGrupoMuscularAsync(grupoMuscular);
         }
 
         #region Util

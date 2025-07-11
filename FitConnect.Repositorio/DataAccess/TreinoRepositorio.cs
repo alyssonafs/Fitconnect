@@ -1,4 +1,5 @@
 using System.Formats.Asn1;
+using Dapper;
 using FitConnect.Dominio.Entidades;
 using FitConnect.Repositorio.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,19 @@ namespace FitConnect.Repositorio.DataAccess
                                             .Include(t => t.ExerciciosTreino)
                                             .Where(t => t.Ativo == true)
                                             .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TreinoStoredProcedure>> ListarPorGrupoMuscularAsync(int grupoMuscular)
+        {
+            using var connection = _contexto.Database.GetDbConnection();
+            const string sql = @"EXEC TreinosPorGrupoMuscular @GrupoMuscular";
+
+            if (connection.State == System.Data.ConnectionState.Closed)
+                await connection.OpenAsync();
+
+            var parametros = new { GrupoMuscular = grupoMuscular };
+            var resultado = await connection.QueryAsync<TreinoStoredProcedure>(sql, parametros);
+            return resultado;
         }
 
         public async Task<Treino> ObterPorIdAsync(int treinoId)

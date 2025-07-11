@@ -175,5 +175,12 @@ namespace FitConnect.Api.Controllers
             }
 
         }
+
+        [HttpGet("ListarPorGrupoMuscular")]
+        public async Task<IActionResult> ListarPorGrupoMuscular([FromQuery] int grupoMuscular)
+        {
+            var treinos = await _treinoAplicacao.ListarPorGrupoMuscularAsync(grupoMuscular);
+            return Ok(treinos);
+        }
     }
 }

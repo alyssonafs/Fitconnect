@@ -14,6 +14,8 @@ namespace FitConnect.Repositorio.DataAccess.Interfaces
 
         Task<IEnumerable<Treino>> ListarTreinosPersonal(int personalId);
 
+        Task<IEnumerable<TreinoStoredProcedure>> ListarPorGrupoMuscularAsync(int grupoMuscular);
+
         Task DeletarAsync(Treino treino);
 
     }
