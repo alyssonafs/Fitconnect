@@ -1,5 +1,6 @@
 using FitConnect.Aplicacao.Interfaces;
 using FitConnect.Dominio.Entidades;
+using FitConnect.Dominio.Enumeradores;
 using FitConnect.Repositorio.DataAccess.Interfaces;
 
 namespace FitConnect.Aplicacao
@@ -8,11 +9,15 @@ namespace FitConnect.Aplicacao
     {
         readonly ITreinoRepositorio _treinoRepositorio;
         readonly IUsuarioRepositorio _usuarioRepositorio;
+        readonly IExercicioRepositorio _exercicioRepositorio;
+        readonly IExercicioTreinoRepositorio _exercicioTreinoRepositorio;
 
-        public TreinoAplicacao(ITreinoRepositorio treinoRepositorio, IUsuarioRepositorio usuarioRepositorio)
+        public TreinoAplicacao(ITreinoRepositorio treinoRepositorio, IUsuarioRepositorio usuarioRepositorio, IExercicioRepositorio exercicioRepositorio, IExercicioTreinoRepositorio exercicioTreinoRepositorio)
         {
             _treinoRepositorio = treinoRepositorio;
             _usuarioRepositorio = usuarioRepositorio;
+            _exercicioRepositorio = exercicioRepositorio;
+            _exercicioTreinoRepositorio = exercicioTreinoRepositorio;
         }
         public async Task AtualizarAsync(Treino treino)
         {

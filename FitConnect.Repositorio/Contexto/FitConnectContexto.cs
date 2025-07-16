@@ -13,8 +13,21 @@ public class FitConnectContexto : DbContext
     public DbSet<TreinoCompartilhado> TreinosCompartilhados { get; set; }
     public DbSet<ExercicioTreino> ExerciciosTreinos { get; set; }
 
+    public FitConnectContexto()
+    {
+        
+    }
+
     public FitConnectContexto(DbContextOptions options) : base(options)
     {
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (_options == null)
+        {
+            optionsBuilder.UseSqlServer("Server=NOTE264\\SQLEXPRESS;Database=Fitconnect;TrustServerCertificate=True;Trusted_Connection=True;");
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

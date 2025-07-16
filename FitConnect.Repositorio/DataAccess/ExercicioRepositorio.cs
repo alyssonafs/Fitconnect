@@ -1,4 +1,5 @@
 using FitConnect.Dominio.Entidades;
+using FitConnect.Dominio.Enumeradores;
 using FitConnect.Repositorio.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ namespace FitConnect.Repositorio.DataAccess
     {
         public ExercicioRepositorio(FitConnectContexto contexto) : base(contexto)
         {
-            
+
         }
         public async Task AtualizarAsync(Exercicio exercicio)
         {
@@ -41,5 +42,13 @@ namespace FitConnect.Repositorio.DataAccess
 
             return exercicio.Id;
         }
+
+        public async Task<List<Exercicio>> BuscarPorGrupoMuscularAsync(TiposGruposMusculares grupo)
+        {
+            return await _contexto.Exercicios
+                .Where(e => e.GrupoMuscular == grupo && e.Ativo)
+                .ToListAsync();
+        }
+
     }
 }

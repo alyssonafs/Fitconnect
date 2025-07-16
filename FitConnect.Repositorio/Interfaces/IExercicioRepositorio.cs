@@ -1,4 +1,5 @@
 using FitConnect.Dominio.Entidades;
+using FitConnect.Dominio.Enumeradores;
 
 namespace FitConnect.Repositorio.DataAccess.Interfaces
 {
@@ -13,6 +14,8 @@ namespace FitConnect.Repositorio.DataAccess.Interfaces
         Task<IEnumerable<Exercicio>> ListarAsync(bool ativo);
 
         Task DeletarAsync(Exercicio exercicio);
+
+        Task<List<Exercicio>> BuscarPorGrupoMuscularAsync(TiposGruposMusculares grupo);
 
     }
 }

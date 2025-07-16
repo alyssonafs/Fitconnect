@@ -14,6 +14,7 @@ namespace FitConnect.Repositorio.Configuracoes
             builder.Property(nameof(Treino.Nome)).HasColumnName("Nome").IsRequired(true);
             builder.Property(nameof(Treino.PersonalId)).HasColumnName("PersonalId").IsRequired(true);
             builder.Property(nameof(Treino.Ativo)).HasColumnName("Ativo").IsRequired(true);
+            builder.Property(nameof(Treino.GeradoPorIa)).HasColumnName("GeradoPorIa").IsRequired(true).HasDefaultValue(false);
 
             builder
                 .HasOne(t => t.Personal)
