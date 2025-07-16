@@ -46,6 +46,34 @@ namespace FitConnect.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ObterPorEmail/{email}")]
+        public async Task<ActionResult> ObterPorEmail([FromRoute] string email)
+        {
+            try
+            {
+                var usuarioDominio = await _usuarioAplicacao.ObterPorEmailAsync(email);
+
+                var usuarioResposta = new UsuarioResposta()
+                {
+                    Id = usuarioDominio.Id,
+                    Nome = usuarioDominio.Nome,
+                    Email = usuarioDominio.Email,
+                    TipoUsuario = usuarioDominio.TipoUsuario,
+                    Genero = usuarioDominio.Genero,
+                    DataNascimento = usuarioDominio.DataNascimento,
+                    Peso = usuarioDominio.Peso,
+                    Altura = usuarioDominio.Altura
+                };
+
+                return Ok(usuarioResposta);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao obter usuário: {ex.Message}");
+            }
+        }
+
         [HttpPost]
         [Route("NovoUsuario")]
         public async Task<ActionResult> Criar([FromBody] UsuarioCriar usuarioCriar)
