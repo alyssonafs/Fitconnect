@@ -3,10 +3,12 @@ using FitConnect.Api.Models.Resposta.Exercicio;
 using FitConnect.Aplicacao.Interfaces;
 using FitConnect.Dominio.Entidades;
 using FitConnect.Dominio.Enumeradores;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitConnect.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ExercicioController : ControllerBase

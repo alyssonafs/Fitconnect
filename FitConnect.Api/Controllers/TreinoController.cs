@@ -2,10 +2,12 @@ using FitConnect.Api.Models.Requisicao.Treino;
 using FitConnect.Api.Models.Resposta.Treino;
 using FitConnect.Aplicacao.Interfaces;
 using FitConnect.Dominio.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitConnect.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class TreinoController : ControllerBase

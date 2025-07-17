@@ -3,6 +3,7 @@ using FitConnect.Api.Models.Resposta.Usuario;
 using FitConnect.Aplicacao.Interfaces;
 using FitConnect.Dominio.Entidades;
 using FitConnect.Dominio.Enumeradores;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitConnect.Api.Controllers
@@ -18,6 +19,7 @@ namespace FitConnect.Api.Controllers
             _usuarioAplicacao = usuarioAplicacao;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Obter/{usuarioId}")]
         public async Task<ActionResult> Obter([FromRoute] int usuarioId)
@@ -102,6 +104,7 @@ namespace FitConnect.Api.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Atualizar")]
         public async Task<ActionResult> Atualizar([FromBody] UsuarioAtualizar usuarioAtualizar)
@@ -152,6 +155,7 @@ namespace FitConnect.Api.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("Deletar/{usuarioId}")]
         public async Task<ActionResult> Deletar([FromRoute] int usuarioId)
@@ -168,6 +172,7 @@ namespace FitConnect.Api.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Restaurar/{usuarioId}")]
         public async Task<ActionResult> Restaurar([FromRoute] int usuarioId)
@@ -184,6 +189,7 @@ namespace FitConnect.Api.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Listar")]
         public async Task<ActionResult> Listar([FromQuery] bool ativos)
