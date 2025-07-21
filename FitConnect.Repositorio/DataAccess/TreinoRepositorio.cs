@@ -1,3 +1,4 @@
+using System.Data;
 using System.Formats.Asn1;
 using Dapper;
 using FitConnect.Dominio.Entidades;
@@ -10,7 +11,7 @@ namespace FitConnect.Repositorio.DataAccess
     {
         public TreinoRepositorio(FitConnectContexto contexto) : base(contexto)
         {
-            
+
         }
         public async Task AtualizarAsync(Treino treino)
         {
@@ -37,17 +38,25 @@ namespace FitConnect.Repositorio.DataAccess
                                             .ToListAsync();
         }
 
-        public async Task<IEnumerable<TreinoStoredProcedure>> ListarPorGrupoMuscularAsync(int grupoMuscular)
+        public async Task<IEnumerable<TreinoStoredProcedure>> ListarPorGrupoMuscularAsync(int grupoMuscular, int usuarioId)
         {
             using var connection = _contexto.Database.GetDbConnection();
-            const string sql = @"EXEC TreinosPorGrupoMuscular @GrupoMuscular";
-
-            if (connection.State == System.Data.ConnectionState.Closed)
+            const string sql = @"
+        EXEC TreinosPorGrupoMuscular 
+            @GrupoMuscular = @Grupo,
+            @UsuarioId      = @Usuario
+    ";
+            if (connection.State == ConnectionState.Closed)
                 await connection.OpenAsync();
 
-            var parametros = new { GrupoMuscular = grupoMuscular };
-            var resultado = await connection.QueryAsync<TreinoStoredProcedure>(sql, parametros);
-            return resultado;
+            var parametros = new
+            {
+                Grupo = grupoMuscular,
+                Usuario = usuarioId
+            };
+
+            return await connection
+                .QueryAsync<TreinoStoredProcedure>(sql, parametros);
         }
 
         public async Task<Treino> ObterPorIdAsync(int treinoId)

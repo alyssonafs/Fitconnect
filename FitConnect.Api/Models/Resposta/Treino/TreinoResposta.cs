@@ -7,5 +7,7 @@ namespace FitConnect.Api.Models.Resposta.Treino
         public string Nome { get; set; }
 
         public int PersonalId { get; set; }
+
+        public bool GeradoPorIa { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 using FitConnect.Api.Models.Requisicao.Treino;
 using FitConnect.Api.Models.Resposta.Treino;
 using FitConnect.Aplicacao.Interfaces;
+using FitConnect.Aplicacao.Models.Requisicao.TreinoIaServico;
 using FitConnect.Dominio.Entidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +16,13 @@ namespace FitConnect.Api.Controllers
         private readonly ITreinoAplicacao _treinoAplicacao;
         private readonly IUsuarioAplicacao _usuarioAplicacao;
 
-        public TreinoController(ITreinoAplicacao treinoAplicacao, IUsuarioAplicacao usuarioAplicacao)
+        private readonly ITreinoIAServico _treinoIAServico;
+
+        public TreinoController(ITreinoAplicacao treinoAplicacao, IUsuarioAplicacao usuarioAplicacao, ITreinoIAServico treinoIAServico)
         {
             _treinoAplicacao = treinoAplicacao;
             _usuarioAplicacao = usuarioAplicacao;
+            _treinoIAServico = treinoIAServico;
         }
 
         [HttpGet]
@@ -38,6 +42,7 @@ namespace FitConnect.Api.Controllers
                     Nome = treinoDominio.Nome,
                     PersonalId = treinoDominio.PersonalId,
                     PersonalNome = personal?.Nome ?? "Desconhecido",
+                    GeradoPorIa = treinoDominio.GeradoPorIa,
                     QuantidadeExercicios = quantidadeExercicios,
                     TempoEstimado = quantidadeExercicios * 5
                 };
@@ -138,7 +143,8 @@ namespace FitConnect.Api.Controllers
                 {
                     Id = treino.Id,
                     Nome = treino.Nome,
-                    PersonalId = treino.PersonalId
+                    PersonalId = treino.PersonalId,
+                    GeradoPorIa = treino.GeradoPorIa
                 }).ToList();
 
                 return Ok(treinos);
@@ -166,7 +172,8 @@ namespace FitConnect.Api.Controllers
                     PersonalId = treino.PersonalId,
                     PersonalNome = personal?.Nome ?? "Desconhecido",
                     QuantidadeExercicios = treino.ExerciciosTreino?.Count() ?? 0,
-                    TempoEstimado = (treino.ExerciciosTreino?.Count() ?? 0) * 5
+                    TempoEstimado = (treino.ExerciciosTreino?.Count() ?? 0) * 5,
+                    GeradoPorIa = treino.GeradoPorIa
                 }).ToList();
 
                 return Ok(treinos);
@@ -178,11 +185,23 @@ namespace FitConnect.Api.Controllers
 
         }
 
-        [HttpGet("ListarPorGrupoMuscular")]
-        public async Task<IActionResult> ListarPorGrupoMuscular([FromQuery] int grupoMuscular)
+        [HttpGet]
+        [Route("ListarPorGrupoMuscular")]
+        public async Task<IActionResult> ListarPorGrupoMuscular([FromQuery] int grupoMuscular, int usuarioId)
         {
-            var treinos = await _treinoAplicacao.ListarPorGrupoMuscularAsync(grupoMuscular);
+            var treinos = await _treinoAplicacao.ListarPorGrupoMuscularAsync(grupoMuscular, usuarioId);
             return Ok(treinos);
+        }
+
+        [HttpPost]
+        [Route("GerarTreinoIa")]
+        public async Task<IActionResult> GerarTreinoIa([FromBody] TreinoRequisicaoDto treinoRequisicaoDto)
+        {
+            var plano = await _treinoIAServico.GerarTreinoAsync(treinoRequisicaoDto);
+
+            var treinoGeradoIaId = await _treinoAplicacao.SalvarTreinoGeradoIaAsync(treinoRequisicaoDto.PersonalId, plano);
+
+            return Ok(treinoGeradoIaId);
         }
     }
 }

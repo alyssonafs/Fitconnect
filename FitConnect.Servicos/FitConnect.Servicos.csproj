@@ -1,13 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\FitConnect.Repositorio\FitConnect.Repositorio.csproj" />
     <ProjectReference Include="..\FitConnect.Dominio\FitConnect.Dominio.csproj" />
-    <ProjectReference Include="..\FitConnect.Servicos\FitConnect.Servicos.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Google_GenerativeAI" Version="2.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <PropertyGroup>

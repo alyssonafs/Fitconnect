@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitConnect.Aplicacao", "Fit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitConnect.Api", "FitConnect.Api\FitConnect.Api.csproj", "{7C541065-1461-4F4A-AA14-43DD29AA7983}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitConnect.Servicos", "FitConnect.Servicos\FitConnect.Servicos.csproj", "{F913B3E7-E642-4418-B7FE-6133E14403E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{7C541065-1461-4F4A-AA14-43DD29AA7983}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C541065-1461-4F4A-AA14-43DD29AA7983}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C541065-1461-4F4A-AA14-43DD29AA7983}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F913B3E7-E642-4418-B7FE-6133E14403E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F913B3E7-E642-4418-B7FE-6133E14403E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F913B3E7-E642-4418-B7FE-6133E14403E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F913B3E7-E642-4418-B7FE-6133E14403E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

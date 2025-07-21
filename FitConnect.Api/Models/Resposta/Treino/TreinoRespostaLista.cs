@@ -13,5 +13,7 @@ namespace FitConnect.Api.Models.Resposta.Treino
         public int QuantidadeExercicios { get; set; }
 
         public int TempoEstimado { get; set; }
+
+        public bool GeradoPorIa { get; set; }
     }
 }

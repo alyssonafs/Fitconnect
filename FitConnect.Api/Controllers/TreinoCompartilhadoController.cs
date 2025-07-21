@@ -130,7 +130,7 @@ namespace FitConnect.Api.Controllers
         
         [HttpGet]
         [Route("Listar/Aluno")]
-        public async Task<ActionResult> ListarPersonal([FromQuery] int alunoId)
+        public async Task<ActionResult> ListarAluno([FromQuery] int alunoId)
         {
             try
             {

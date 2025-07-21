@@ -1,9 +1,12 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using FitConnect.Aplicacao;
 using FitConnect.Aplicacao.Interfaces;
 using FitConnect.Dominio.Entidades;
 using FitConnect.Repositorio.DataAccess;
 using FitConnect.Repositorio.DataAccess.Interfaces;
+using FitConnect.Servicos.GeminiServico;
+using FitConnect.Servicos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -23,6 +26,7 @@ builder.Services.AddScoped<ITreinoAplicacao, TreinoAplicacao>();
 builder.Services.AddScoped<IExercicioTreinoAplicacao, ExercicioTreinoAplicacao>();
 builder.Services.AddScoped<IExercicioAplicacao, ExercicioAplicacao>();
 builder.Services.AddScoped<IAuthServiceAplicacao, AuthServiceAplicacao>();
+builder.Services.AddScoped<ITreinoIAServico, TreinoIAServico>();
 
 
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
@@ -32,6 +36,7 @@ builder.Services.AddScoped<IExercicioTreinoRepositorio, ExercicioTreinoRepositor
 builder.Services.AddScoped<IExercicioRepositorio, ExercicioRepositorio>();
 
 //Adicione os serviços
+builder.Services.AddSingleton<IGeminiServico, GeminiServico>();
 
 builder.Services.AddCors(options =>
 {
@@ -61,7 +66,6 @@ builder.Services.AddAuthentication("Bearer")
     });
 
 builder.Services.AddControllers();
-builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<FitConnectContexto>(options => options
     .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

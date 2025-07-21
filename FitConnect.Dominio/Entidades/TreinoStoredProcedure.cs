@@ -6,6 +6,7 @@ namespace FitConnect.Dominio.Entidades
         public string Nome { get; set; }
         public int PersonalId { get; set; }
         public bool Ativo { get; set; }
+        public bool GeradoPorIa { get; set; }
         public string PersonalNome { get; set; }
         public int QuantidadeExercicios { get; set; }
         public int TempoEstimado { get; set; }

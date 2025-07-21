@@ -1,4 +1,5 @@
 using FitConnect.Aplicacao.Interfaces;
+using FitConnect.Aplicacao.Models.Requisicao.TreinoIaServico;
 using FitConnect.Dominio.Entidades;
 using FitConnect.Dominio.Enumeradores;
 using FitConnect.Repositorio.DataAccess.Interfaces;
@@ -114,9 +115,30 @@ namespace FitConnect.Aplicacao
             return await _treinoRepositorio.SalvarAsync(treino);
         }
 
-        public async Task<IEnumerable<TreinoStoredProcedure>> ListarPorGrupoMuscularAsync(int grupoMuscular)
+        public async Task<IEnumerable<TreinoStoredProcedure>> ListarPorGrupoMuscularAsync(int grupoMuscular, int usuarioId)
         {
-            return await _treinoRepositorio.ListarPorGrupoMuscularAsync(grupoMuscular);
+            return await _treinoRepositorio.ListarPorGrupoMuscularAsync(grupoMuscular, usuarioId);
+        }
+
+        public async Task<int> SalvarTreinoGeradoIaAsync(int personalId, PlanoTreinoDto planoTreinoDto)
+        {
+            var treino = new Treino
+            {
+                Nome = planoTreinoDto.Nome,
+                PersonalId = personalId,
+                GeradoPorIa = true
+            };
+            treino.ExerciciosTreino = planoTreinoDto.Exercicios
+                .Select(e => new ExercicioTreino
+                {
+                    ExercicioId = e.ExercicioId,
+                    Serie = e.Serie,
+                    Treino = treino
+                })
+                .ToList();
+
+            return await _treinoRepositorio.SalvarAsync(treino);
+
         }
 
         #region Util

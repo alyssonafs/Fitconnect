@@ -1,3 +1,4 @@
+using FitConnect.Aplicacao.Models.Requisicao.TreinoIaServico;
 using FitConnect.Dominio.Entidades;
 
 namespace FitConnect.Aplicacao.Interfaces
@@ -18,7 +19,9 @@ namespace FitConnect.Aplicacao.Interfaces
 
         Task RestaurarAsync(int usuarioId);
 
-        Task<IEnumerable<TreinoStoredProcedure>> ListarPorGrupoMuscularAsync(int grupoMuscular);
+        Task<IEnumerable<TreinoStoredProcedure>> ListarPorGrupoMuscularAsync(int grupoMuscular, int usuarioId);
+
+        Task<int> SalvarTreinoGeradoIaAsync(int personalId, PlanoTreinoDto planoTreinoDto);
 
     }
 }
